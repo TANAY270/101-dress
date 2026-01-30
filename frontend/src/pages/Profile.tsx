@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   ShieldCheck,
-  Wallet,
   Plus,
   Settings,
 } from 'lucide-react';
@@ -29,6 +28,7 @@ interface Item {
   brand: string;
   image: string;
   status: string;
+  type?: string; // e.g. 'sale', 'rent', 'both'
   sale_price?: number;
   rent_price?: number;
 }
@@ -46,7 +46,7 @@ const fetchUser = async (): Promise<User> => {
   // Mock user data - replace with actual API call
   return {
     id: 'u1',
-    name: 'Alex Rivera',
+    name: 'Adhitya Chandel',
     trust_score: 92,
     wallet_balance: 45000,
     escrow_balance: 12500,
@@ -55,14 +55,14 @@ const fetchUser = async (): Promise<User> => {
 };
 
 const fetchUserItems = async (): Promise<Item[]> => {
-  const response = await fetch('http://localhost:8000/api/items');
+  const response = await fetch('http://localhost:8001/api/items');
   if (!response.ok) throw new Error('Failed to fetch items');
   const items = await response.json();
   return items.slice(0, 4); // Mock user items
 };
 
 const fetchUserOrders = async (): Promise<Order[]> => {
-  const response = await fetch('http://localhost:8000/api/orders?user_id=u1');
+  const response = await fetch('http://localhost:8001/api/orders?user_id=u1');
   if (!response.ok) throw new Error('Failed to fetch orders');
   return response.json();
 };
@@ -101,6 +101,28 @@ const Profile = () => {
     );
   }
 
+  const [filterType, setFilterType] = useState('all');
+  const [sortOrder, setSortOrder] = useState('default');
+
+  const filteredItems = items
+    .filter((item) => {
+      if (filterType === 'all') return true;
+      // specific logic: if item.type is 'both', it shows in both buy and rent filters
+      // if item.type matches the filter exactly
+      if (item.type === 'both') return true;
+      return item.type === filterType;
+    })
+    .sort((a, b) => {
+      if (sortOrder === 'default') return 0;
+
+      const priceA = a.sale_price || a.rent_price || 0;
+      const priceB = b.sale_price || b.rent_price || 0;
+
+      if (sortOrder === 'price-asc') return priceA - priceB;
+      if (sortOrder === 'price-desc') return priceB - priceA;
+      return 0;
+    });
+
   return (
     <main className="min-h-screen bg-background">
       <Header />
@@ -134,20 +156,7 @@ const Profile = () => {
           </div>
 
           {/* Wallet Cards */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="p-6 bg-gradient-to-br from-gold/10 to-gold/5 border-gold/20">
-              <div className="flex items-center gap-3 mb-3">
-                <Wallet className="w-5 h-5 text-gold" />
-                <h3 className="font-serif text-lg font-medium">Wallet Balance</h3>
-              </div>
-              <p className="text-3xl font-medium text-foreground">
-                ₹{user.wallet_balance.toLocaleString()}
-              </p>
-              <Button variant="link" className="px-0 mt-2">
-                Add Funds
-              </Button>
-            </Card>
-
+          <div className="max-w-md">
             <Card className="p-6 bg-gradient-to-br from-secondary/50 to-secondary/20 border-border">
               <div className="flex items-center gap-3 mb-3">
                 <ShieldCheck className="w-5 h-5 text-muted-foreground" />
@@ -250,17 +259,47 @@ const Profile = () => {
 
           {/* Listings Tab */}
           <TabsContent value="listings">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="font-serif text-2xl font-medium">All Listings</h3>
-              <Link to="/sell">
-                <Button className="btn-editorial-dark">
-                  <Plus className="w-4 h-4 mr-2" />
-                  List New Item
-                </Button>
-              </Link>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+              <div>
+                <h3 className="font-serif text-2xl font-medium mb-2">All Listings</h3>
+                <div className="flex gap-2">
+                  {['all', 'sale', 'rent'].map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => setFilterType(type)}
+                      className={`text-sm px-3 py-1 rounded-full border transition-colors ${filterType === type
+                        ? 'bg-primary text-primary-foreground border-primary'
+                        : 'bg-transparent text-muted-foreground border-border hover:border-primary'
+                        }`}
+                    >
+                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 w-full md:w-auto">
+                <select
+                  value={sortOrder}
+                  onChange={(e) => setSortOrder(e.target.value)}
+                  className="text-sm border border-border bg-background rounded-md px-3 py-2 outline-none focus:border-gold"
+                >
+                  <option value="default">Sort by: Relevancy</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                </select>
+
+                <Link to="/sell">
+                  <Button className="btn-editorial-dark whitespace-nowrap">
+                    <Plus className="w-4 h-4 mr-2" />
+                    List Item
+                  </Button>
+                </Link>
+              </div>
             </div>
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {items.map((item) => (
+              {filteredItems.map((item) => (
                 <Card key={item.id} className="overflow-hidden border-border hover:shadow-lg transition-shadow">
                   <img
                     src={item.image}
@@ -281,10 +320,20 @@ const Profile = () => {
                           ₹{item.sale_price.toLocaleString()}
                         </span>
                       )}
+                      {!item.sale_price && item.rent_price && (
+                        <span className="font-medium">
+                          ₹{item.rent_price.toLocaleString()}/day
+                        </span>
+                      )}
                     </div>
                   </div>
                 </Card>
               ))}
+              {filteredItems.length === 0 && (
+                <div className="col-span-full py-12 text-center text-muted-foreground">
+                  No listings found matching your criteria.
+                </div>
+              )}
             </div>
           </TabsContent>
 

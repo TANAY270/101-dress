@@ -22,7 +22,7 @@ interface Product {
 }
 
 const fetchProducts = async (): Promise<Product[]> => {
-  const response = await fetch('http://localhost:8000/api/items');
+  const response = await fetch('http://localhost:8001/api/items');
   if (!response.ok) {
     throw new Error('Failed to fetch products');
   }
@@ -43,7 +43,7 @@ const Products = () => {
 
   useEffect(() => {
     setIsVisible(true);
-    
+
     const handleScroll = () => {
       if (heroRef.current) {
         const rect = heroRef.current.getBoundingClientRect();
@@ -70,16 +70,16 @@ const Products = () => {
   return (
     <main className="min-h-screen bg-background overflow-x-hidden">
       <Header />
-      
+
       {/* Editorial Hero Section with Parallax */}
-      <section 
+      <section
         ref={heroRef}
         className="relative h-[70vh] md:h-[80vh] w-full overflow-hidden"
       >
         {/* Parallax Background */}
-        <div 
+        <div
           className="absolute inset-0 w-full h-[120%]"
-          style={{ 
+          style={{
             transform: `translateY(-${parallaxOffset}px)`,
             transition: 'transform 0.1s ease-out'
           }}
@@ -94,7 +94,7 @@ const Products = () => {
         <div className="relative h-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
           <div className="max-w-4xl">
             <div className="w-16 h-px bg-gold mb-8 animate-fade-in-up" />
-            
+
             <p className="text-editorial-accent text-foreground/70 mb-6 animate-fade-in-up uppercase tracking-[0.3em]">
               The Collection
             </p>
@@ -143,11 +143,10 @@ const Products = () => {
                 <button
                   key={category}
                   onClick={() => setCategoryFilter(category)}
-                  className={`text-sm uppercase tracking-[0.2em] transition-colors duration-500 font-sans ${
-                    categoryFilter === category 
-                      ? 'text-foreground border-b-2 border-gold' 
+                  className={`text-sm uppercase tracking-[0.2em] transition-colors duration-500 font-sans ${categoryFilter === category
+                      ? 'text-foreground border-b-2 border-gold'
                       : 'text-muted-foreground hover:text-foreground'
-                  }`}
+                    }`}
                 >
                   {category}
                 </button>
@@ -176,9 +175,8 @@ const Products = () => {
                 <Link
                   key={product.id}
                   to={`/product/${product.id}`}
-                  className={`group transition-all duration-1000 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                  }`}
+                  className={`group transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                    }`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <article className="space-y-6">
@@ -189,7 +187,7 @@ const Products = () => {
                         alt={product.title}
                         className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                       />
-                      
+
                       {/* Subtle Overlay on Hover */}
                       <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-all duration-700" />
 
@@ -206,8 +204,8 @@ const Products = () => {
                       {/* Availability Badge */}
                       <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         <div className="text-xs uppercase tracking-wider text-foreground/70 font-sans">
-                          {product.type === 'both' ? 'Sale • Rent' : 
-                           product.type === 'sale' ? 'For Sale' : 'For Rent'}
+                          {product.type === 'both' ? 'Sale • Rent' :
+                            product.type === 'sale' ? 'For Sale' : 'For Rent'}
                         </div>
                       </div>
                     </div>

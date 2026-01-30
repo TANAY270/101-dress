@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
@@ -276,62 +276,62 @@ const SellItem = () => {
 
                 {(formData.listingType === 'sale' ||
                   formData.listingType === 'both') && (
-                  <div className="space-y-2">
-                    <Label htmlFor="salePrice">Sale Price (₹) *</Label>
-                    <Input
-                      id="salePrice"
-                      type="number"
-                      placeholder="25000"
-                      value={formData.salePrice}
-                      onChange={(e) =>
-                        setFormData({ ...formData, salePrice: e.target.value })
-                      }
-                      required={
-                        formData.listingType === 'sale' ||
-                        formData.listingType === 'both'
-                      }
-                    />
-                  </div>
-                )}
+                    <div className="space-y-2">
+                      <Label htmlFor="salePrice">Sale Price (₹) *</Label>
+                      <Input
+                        id="salePrice"
+                        type="number"
+                        placeholder="25000"
+                        value={formData.salePrice}
+                        onChange={(e) =>
+                          setFormData({ ...formData, salePrice: e.target.value })
+                        }
+                        required={
+                          formData.listingType === 'sale' ||
+                          formData.listingType === 'both'
+                        }
+                      />
+                    </div>
+                  )}
 
                 {(formData.listingType === 'rent' ||
                   formData.listingType === 'both') && (
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="rentPrice">Rent Price/Day (₹) *</Label>
-                      <Input
-                        id="rentPrice"
-                        type="number"
-                        placeholder="2500"
-                        value={formData.rentPrice}
-                        onChange={(e) =>
-                          setFormData({ ...formData, rentPrice: e.target.value })
-                        }
-                        required={
-                          formData.listingType === 'rent' ||
-                          formData.listingType === 'both'
-                        }
-                      />
-                    </div>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="rentPrice">Rent Price/Day (₹) *</Label>
+                        <Input
+                          id="rentPrice"
+                          type="number"
+                          placeholder="2500"
+                          value={formData.rentPrice}
+                          onChange={(e) =>
+                            setFormData({ ...formData, rentPrice: e.target.value })
+                          }
+                          required={
+                            formData.listingType === 'rent' ||
+                            formData.listingType === 'both'
+                          }
+                        />
+                      </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="deposit">Refundable Deposit (₹) *</Label>
-                      <Input
-                        id="deposit"
-                        type="number"
-                        placeholder="10000"
-                        value={formData.deposit}
-                        onChange={(e) =>
-                          setFormData({ ...formData, deposit: e.target.value })
-                        }
-                        required={
-                          formData.listingType === 'rent' ||
-                          formData.listingType === 'both'
-                        }
-                      />
+                      <div className="space-y-2">
+                        <Label htmlFor="deposit">Refundable Deposit (₹) *</Label>
+                        <Input
+                          id="deposit"
+                          type="number"
+                          placeholder="10000"
+                          value={formData.deposit}
+                          onChange={(e) =>
+                            setFormData({ ...formData, deposit: e.target.value })
+                          }
+                          required={
+                            formData.listingType === 'rent' ||
+                            formData.listingType === 'both'
+                          }
+                        />
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
               </div>
             </Card>
 
@@ -372,9 +372,9 @@ const SellItem = () => {
               <label htmlFor="terms" className="text-sm text-muted-foreground">
                 I confirm that this item is authentic and in the condition stated. I
                 agree to the{' '}
-                <a href="#terms" className="underline hover:text-foreground">
+                <Link to="/about" className="underline hover:text-foreground">
                   Seller Terms & Conditions
-                </a>
+                </Link>
                 .
               </label>
             </div>

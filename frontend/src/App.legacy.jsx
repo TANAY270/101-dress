@@ -21,7 +21,13 @@ import {
   Lock,
   Mail,
   UserPlus,
-  LogIn
+  LogIn,
+  Info,
+  ShieldAlert,
+  Sliders,
+  Instagram,
+  Twitter,
+  Linkedin
 } from 'lucide-react';
 
 // --- COMPONENTS ---
@@ -111,19 +117,168 @@ const ListingCard = ({ item, onAction }) => {
               </div>
             </button>
           )}
+
+          <button
+            onClick={() => onAction('about')}
+            className="w-full flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-emerald-500 transition-colors pt-4 border-t border-slate-50 dark:border-slate-800/50 mt-4"
+          >
+            <Info className="w-3 h-3" />
+            Platform Policy
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-const SellerWizard = ({ onClose }) => {
+const AboutSection = () => {
+  return (
+    <div className="py-8 space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span className="text-emerald-500 font-bold text-xs uppercase tracking-[0.2em] mb-4 block">Our Story</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light leading-tight mb-8 text-slate-900 dark:text-white">
+            Where luxury finds <span className="italic">new purpose</span>
+          </h2>
+          <div className="space-y-6 text-slate-600 dark:text-slate-400 leading-relaxed text-lg pb-8 border-b border-slate-100 dark:border-slate-800">
+            <p>
+              At 101 Dresses, we believe that true elegance transcends seasons.
+              Each piece in our collection has been carefully curated,
+              authenticated, and prepared for its next chapter.
+            </p>
+            <p>
+              We partner with discerning collectors and fashion houses to bring
+              you extraordinary pieces that tell a story—garments that have
+              graced runways, red carpets, and the most elegant occasions.
+            </p>
+          </div>
+          <div className="mt-10 grid grid-cols-2 gap-8">
+            <div className="flex flex-col">
+              <span className="text-4xl font-serif text-slate-900 dark:text-white font-bold">10K+</span>
+              <span className="text-xs uppercase tracking-widest text-slate-400 mt-2">Curated Pieces</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-4xl font-serif text-slate-900 dark:text-white font-bold">100%</span>
+              <span className="text-xs uppercase tracking-widest text-slate-400 mt-2">Authenticated</span>
+            </div>
+          </div>
+        </div>
+        <div className="relative group">
+          <div className="aspect-[4/5] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl relative">
+            <img
+              src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1000"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+              alt="Editorial"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
+          </div>
+          <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl -z-10" />
+        </div>
+      </div>
+
+      <div className="bg-slate-900 dark:bg-slate-100 rounded-[2.5rem] p-10 md:p-16 text-white dark:text-slate-900 shadow-2xl transition-colors duration-500">
+        <div className="max-w-xl mb-12">
+          <h3 className="text-3xl font-serif mb-4 flex items-center gap-3">
+            <ShieldCheck className="w-8 h-8 text-emerald-400 dark:text-emerald-500" />
+            The 101 Handover
+          </h3>
+          <p className="text-slate-400 dark:text-slate-500">Our promise of uncompromising quality and trust in every transaction.</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {[
+            { title: 'Curation', desc: 'Every item is physically inspected by our experts for quality and authenticity.' },
+            { title: 'Restoration', desc: 'Minor imperfections are addressed to ensure you receive pieces in pristine condition.' },
+            { title: 'Confidence', desc: 'Our dual-escrow system ensures both buyer and seller are protected until handover.' }
+          ].map((item, idx) => (
+            <div key={idx} className="space-y-4 group">
+              <div className="text-5xl font-serif opacity-10 italic group-hover:opacity-30 transition-opacity">0{idx + 1}</div>
+              <h4 className="font-bold text-xl">{item.title}</h4>
+              <p className="text-slate-400 dark:text-slate-600 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Footer = ({ onNavigate }) => {
+  return (
+    <footer className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 pt-16 pb-8 transition-colors">
+      <div className="max-w-7xl mx-auto px-4 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <div className="md:col-span-2">
+            <div className="flex items-center justify-center md:justify-start gap-2 mb-6 cursor-pointer" onClick={() => onNavigate('browse')}>
+              <div className="w-8 h-8 bg-slate-900 dark:bg-slate-100 rounded flex items-center justify-center text-white dark:text-slate-900 font-bold text-xs">101</div>
+              <span className="font-bold text-xl tracking-tight dark:text-white">101 Dresses<span className="text-emerald-500">.</span></span>
+            </div>
+            <p className="text-slate-500 dark:text-slate-400 max-w-sm leading-relaxed mb-8 mx-auto md:ml-0">
+              The world's first dual-escrow luxury resale platform.
+              Authenticity verified by humans, protected by code.
+            </p>
+            <div className="flex justify-center md:justify-start gap-4">
+              <button className="p-2 bg-slate-100 dark:bg-slate-800 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"><Instagram className="w-5 h-5" /></button>
+              <button className="p-2 bg-slate-100 dark:bg-slate-800 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"><Twitter className="w-5 h-5" /></button>
+              <button className="p-2 bg-slate-100 dark:bg-slate-800 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"><Linkedin className="w-5 h-5" /></button>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-slate-900 dark:text-white mb-6 uppercase text-xs tracking-[0.2em]">Platform</h4>
+            <ul className="space-y-4">
+              {['Home', 'Shop', 'About', 'Trust Score'].map(item => (
+                <li key={item}>
+                  <button
+                    onClick={() => {
+                      if (item === 'Home') onNavigate('browse');
+                      if (item === 'Shop') { onNavigate('browse'); window.scrollTo(0, 400); }
+                      if (item === 'About') onNavigate('about');
+                    }}
+                    className="text-slate-500 dark:text-slate-400 hover:text-emerald-500 transition-colors text-sm font-medium"
+                  >
+                    {item}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-slate-900 dark:text-white mb-6 uppercase text-xs tracking-[0.2em]">Legal</h4>
+            <ul className="space-y-4">
+              {['Privacy Policy', 'Terms of Service', 'Handover Policy'].map(item => (
+                <li key={item}>
+                  <button
+                    onClick={() => onNavigate('about')}
+                    className="text-slate-500 dark:text-slate-400 hover:text-emerald-500 transition-colors text-sm font-medium"
+                  >
+                    {item}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-slate-400">© 2024 101 Dresses. Built for the future of circular luxury.</p>
+          <div className="flex gap-6">
+            <button onClick={() => onNavigate('about')} className="text-xs text-slate-400 hover:text-emerald-500 transition-colors">Security</button>
+            <button onClick={() => onNavigate('about')} className="text-xs text-slate-400 hover:text-emerald-500 transition-colors">Insurance</button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+const SellerWizard = ({ onClose, onNavigateAbout }) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     title: '',
     mode: 'both', // sale, rent, both
-    salePrice: '',
+    salePrice: 50000,
     rentPrice: '',
+    insurance: true,
   });
 
   // Mock Pricing Intelligence
@@ -135,7 +290,15 @@ const SellerWizard = ({ onClose }) => {
       <div className="bg-white dark:bg-slate-900 rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl flex flex-col max-h-[90vh] border border-slate-200 dark:border-slate-800">
         <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-950">
           <div>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">List an Item</h2>
+            <div className="flex items-center gap-2">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">List an Item</h2>
+              <button
+                onClick={onNavigateAbout}
+                className="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded-full hover:bg-emerald-200 dark:hover:bg-emerald-800 transition-colors"
+              >
+                Policy
+              </button>
+            </div>
             <p className="text-sm text-slate-500 dark:text-slate-400">Step {step} of 3: {step === 1 ? 'Details' : step === 2 ? 'Pricing' : '101 Handover'}</p>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
@@ -197,16 +360,51 @@ const SellerWizard = ({ onClose }) => {
               </div>
 
               {(formData.mode === 'sale' || formData.mode === 'both') && (
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Sale Price (₹)</label>
-                  <input
-                    type="number"
-                    value={formData.salePrice}
-                    onChange={(e) => setFormData({ ...formData, salePrice: e.target.value })}
-                    className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 outline-none text-slate-900 dark:text-slate-100"
-                  />
+                <div className="space-y-4">
+                  <div className="flex justify-between items-end">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Sale Price</label>
+                    <span className="text-2xl font-serif font-bold text-slate-900 dark:text-white">₹{Number(formData.salePrice || 0).toLocaleString()}</span>
+                  </div>
+                  <div className="relative pt-2">
+                    <input
+                      type="range"
+                      min="5000"
+                      max="500000"
+                      step="5000"
+                      value={formData.salePrice}
+                      onChange={(e) => setFormData({ ...formData, salePrice: e.target.value })}
+                      className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                    />
+                    <div className="flex justify-between text-[10px] text-slate-400 mt-2 font-bold uppercase tracking-widest">
+                      <span>₹5K</span>
+                      <span>₹250K</span>
+                      <span>₹500K</span>
+                    </div>
+                  </div>
                 </div>
               )}
+
+              <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
+                <div className="flex items-start gap-4 p-4 bg-emerald-50/50 dark:bg-emerald-900/5 rounded-2xl border border-emerald-100/50 dark:border-emerald-800/30">
+                  <div className="mt-1">
+                    <ShieldAlert className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-sm font-bold text-slate-900 dark:text-white">Damage Control Insurance</span>
+                      <button
+                        onClick={() => setFormData({ ...formData, insurance: !formData.insurance })}
+                        className={`w-10 h-5 rounded-full transition-colors relative ${formData.insurance ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-slate-700'}`}
+                      >
+                        <div className={`absolute top-1 w-3 h-3 bg-white rounded-full transition-all ${formData.insurance ? 'left-6' : 'left-1'}`} />
+                      </button>
+                    </div>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                      Protect your item during the handover and fulfillment process. Covers accidental damage or transit issues. <button onClick={onNavigateAbout} className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline">Learn more.</button>
+                    </p>
+                  </div>
+                </div>
+              </div>
 
               {(formData.mode === 'rent' || formData.mode === 'both') && (
                 <div className="bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-xl border border-indigo-100 dark:border-indigo-800">
@@ -275,12 +473,21 @@ const SellerWizard = ({ onClose }) => {
               Continue
             </button>
           ) : (
-            <button
-              onClick={onClose}
-              className="w-full bg-emerald-600 text-white py-3 rounded-xl font-medium hover:bg-emerald-700 shadow-lg shadow-emerald-200/50"
-            >
-              Schedule Pickup & Submit
-            </button>
+            <div className="space-y-4">
+              <button
+                onClick={onClose}
+                className="w-full bg-emerald-600 text-white py-3 rounded-xl font-medium hover:bg-emerald-700 shadow-lg shadow-emerald-200/50"
+              >
+                Schedule Pickup & Submit
+              </button>
+              <button
+                onClick={onNavigateAbout}
+                className="w-full text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-medium flex items-center justify-center gap-2 py-2"
+              >
+                <Info className="w-4 h-4" />
+                Learn more about our Authenticity & Insurance Policy
+              </button>
+            </div>
           )}
         </div>
       </div>
@@ -349,6 +556,11 @@ export default function App() {
       localStorage.setItem('theme', 'light');
     }
   }, [darkMode]);
+
+  // Scroll to top on view change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [view]);
 
   const toggleTheme = () => {
     setDarkMode(!darkMode);
@@ -436,12 +648,44 @@ export default function App() {
         {/* --- HEADER --- */}
         <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
           <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div className="flex items-center gap-2 cursor-pointer" onClick={() => setView('browse')}>
-              <div className="w-auto h-8 bg-slate-900 dark:bg-slate-100 rounded-lg flex items-center justify-center text-white dark:text-slate-900 font-bold px-2 text-sm">
+            <div className="flex items-center gap-2 cursor-pointer group" onClick={() => { setView('browse'); setActiveCategory('All'); setSearchQuery(''); }}>
+              <div className="w-auto h-8 bg-slate-900 dark:bg-slate-100 rounded-lg flex items-center justify-center text-white dark:text-slate-900 font-bold px-2 text-sm transition-transform group-hover:scale-105">
                 101
               </div>
-              <span className="font-bold text-xl tracking-tight hidden sm:block dark:text-white">101 Dresses<span className="text-emerald-500">.</span></span>
+              <span className="font-bold text-xl tracking-tight hidden sm:block dark:text-white group-hover:text-emerald-500 transition-colors">101 Dresses<span className="text-emerald-500">.</span></span>
             </div>
+
+            {/* Desktop Navigation Links */}
+            <nav className="hidden lg:flex items-center gap-8 ml-8">
+              <button
+                onClick={() => setView('browse')}
+                className={`text-sm font-semibold uppercase tracking-widest hover:text-emerald-500 transition-colors ${view === 'browse' ? 'text-emerald-500 underline underline-offset-8 decoration-2' : 'text-slate-600 dark:text-slate-400'}`}
+              >
+                Home
+              </button>
+              <button
+                onClick={() => { setView('browse'); setActiveCategory('All'); }}
+                className={`text-sm font-semibold uppercase tracking-widest hover:text-emerald-500 transition-colors ${view === 'browse' && activeCategory === 'All' ? 'text-emerald-500 underline underline-offset-8 decoration-2' : 'text-slate-600 dark:text-slate-400'}`}
+              >
+                Shop
+              </button>
+              {user && (
+                <button
+                  onClick={() => setView('orders')}
+                  className={`text-sm font-semibold uppercase tracking-widest hover:text-emerald-500 transition-colors ${view === 'orders' ? 'text-emerald-500 underline underline-offset-8 decoration-2' : 'text-slate-600 dark:text-slate-400'}`}
+                >
+                  My Orders
+                </button>
+              )}
+              <button
+                onClick={() => setView('about')}
+                className={`text-sm font-semibold uppercase tracking-widest hover:text-emerald-500 transition-colors ${view === 'about' ? 'text-emerald-500 underline underline-offset-8 decoration-2' : 'text-slate-600 dark:text-slate-400'}`}
+              >
+                About
+              </button>
+            </nav>
+
+            <div className="flex-1"></div>
 
             <div className="flex items-center gap-6">
 
@@ -655,7 +899,13 @@ export default function App() {
                     <ListingCard
                       key={item.id}
                       item={item}
-                      onAction={(type, item) => alert(`Mock Flow: Initiating ${type} flow for ${item.title}. Money will be moved to Escrow.`)}
+                      onAction={(type, item) => {
+                        if (type === 'about') {
+                          setView('about');
+                        } else {
+                          alert(`Mock Flow: Initiating ${type} flow for ${item.title}. Money will be moved to Escrow.`);
+                        }
+                      }}
                     />
                   ))}
                 </div>
@@ -739,16 +989,19 @@ export default function App() {
               </div>
             </div>
           )}
+          {view === 'about' && <AboutSection />}
         </main>
+
+        <Footer onNavigate={setView} />
 
         {/* --- MOBILE NAV --- */}
         <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex justify-around p-3 z-50 safe-area-bottom">
-          <button onClick={() => setView('browse')} className={`flex flex-col items-center ${view === 'browse' ? 'text-slate-900 dark:text-white' : 'text-slate-400'}`}>
+          <button onClick={() => { setView('browse'); setActiveCategory('All'); setSearchQuery(''); }} className={`flex flex-col items-center ${view === 'browse' ? 'text-slate-900 dark:text-white' : 'text-slate-400'}`}>
             <ShoppingBag className="w-6 h-6" />
             <span className="text-[10px] mt-1">Browse</span>
           </button>
           <button onClick={() => user ? setShowListingWizard(true) : setView('auth')} className="flex flex-col items-center text-slate-400">
-            <div className="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-full p-3 -mt-6 shadow-lg border-4 border-slate-50 dark:border-slate-800">
+            <div className="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-full p-3 -mt-6 shadow-lg border-4 border-slate-50 dark:border-slate-800 transition-transform hover:scale-110">
               <PlusCircle className="w-6 h-6" />
             </div>
           </button>
@@ -762,9 +1015,13 @@ export default function App() {
             <User className="w-6 h-6" />
             <span className="text-[10px] mt-1">{user ? 'Profile' : 'Sign In'}</span>
           </button>
+          <button onClick={() => setView('about')} className={`flex flex-col items-center ${view === 'about' ? 'text-slate-900 dark:text-white' : 'text-slate-400'}`}>
+            <Info className="w-6 h-6" />
+            <span className="text-[10px] mt-1">About</span>
+          </button>
         </nav>
 
-        {showListingWizard && <SellerWizard onClose={() => setShowListingWizard(false)} />}
+        {showListingWizard && <SellerWizard onClose={() => setShowListingWizard(false)} onNavigateAbout={() => { setView('about'); setShowListingWizard(false); }} />}
       </div>
     </div>
   );

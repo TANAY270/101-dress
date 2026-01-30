@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground py-16 md:py-24">
@@ -7,7 +9,7 @@ const Footer = () => {
           <div className="md:col-span-2">
             <h3 className="font-serif text-3xl mb-6">101 Dresses</h3>
             <p className="text-primary-foreground/70 max-w-sm leading-relaxed">
-              Pre-loved luxury, reimagined for the discerning. 
+              Pre-loved luxury, reimagined for the discerning.
               Curating the world's finest designer pieces since 2020.
             </p>
           </div>
@@ -18,16 +20,38 @@ const Footer = () => {
               Navigate
             </p>
             <ul className="space-y-4">
-              {['Products', 'About', 'The Edit', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a 
-                    href={`#${item.toLowerCase()}`}
-                    className="nav-link text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-500"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link
+                  to="/products"
+                  className="nav-link text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-500"
+                >
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  className="nav-link text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-500"
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/products"
+                  className="nav-link text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-500"
+                >
+                  The Edit
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  className="nav-link text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-500"
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -39,7 +63,7 @@ const Footer = () => {
             <ul className="space-y-4">
               {['Instagram', 'Pinterest', 'Newsletter'].map((item) => (
                 <li key={item}>
-                  <a 
+                  <a
                     href="#"
                     className="nav-link text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-500"
                   >

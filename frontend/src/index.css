@@ -131,7 +131,7 @@
   }
 
   .hover-glow {
-    @apply transition-all duration-700 hover:shadow-[0_0_25px_rgba(177, 144, 99, 0.3)];
+    @apply transition-all duration-700 hover:shadow-[0_0_25px_rgba(177,144,99,0.3)];
   }
 
   /* Header Glass Effect */

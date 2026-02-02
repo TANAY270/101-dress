@@ -1,0 +1,11 @@
+{
+  "name": "101-dress-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FastAPI backend for 101 Dress",
+  "scripts": {
+    "start": "python -m backend.main",
+    "dev": "python -m backend.main"
+  }
+  
+}

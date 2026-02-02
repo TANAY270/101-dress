@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { API_URL, API_BASE_URL } from '@/config/api';
+import { API_BASE_URL } from '@/config/api';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { API_URL, API_BASE_URL } from '@/config/api';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
@@ -55,14 +56,14 @@ const fetchUser = async (): Promise<User> => {
 };
 
 const fetchUserItems = async (): Promise<Item[]> => {
-  const response = await fetch('http://localhost:8001/api/items');
+  const response = await fetch(`${API_BASE_URL}/api/items`);
   if (!response.ok) throw new Error('Failed to fetch items');
   const items = await response.json();
   return items.slice(0, 4); // Mock user items
 };
 
 const fetchUserOrders = async (): Promise<Order[]> => {
-  const response = await fetch('http://localhost:8001/api/orders?user_id=u1');
+  const response = await fetch(`${API_BASE_URL}/api/orders?user_id=u1`);
   if (!response.ok) throw new Error('Failed to fetch orders');
   return response.json();
 };

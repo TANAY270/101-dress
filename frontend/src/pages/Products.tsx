@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { API_URL, API_BASE_URL } from '@/config/api';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ShieldCheck, Filter } from 'lucide-react';
@@ -40,7 +41,7 @@ interface Product {
 }
 
 const fetchProducts = async (): Promise<Product[]> => {
-  const response = await fetch('http://localhost:8001/api/items');
+  const response = await fetch(`${API_BASE_URL}/api/items`);
   if (!response.ok) {
     throw new Error('Failed to fetch products');
   }

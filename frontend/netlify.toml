@@ -1,0 +1,26 @@
+# Netlify Build Configuration
+
+[build]
+  # Build command
+  command = "npm run build"
+  
+  # Output directory
+  publish = "dist"
+  
+  # Environment variables
+  [build.environment]
+    NODE_VERSION = "18"
+
+# Redirect rules for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { API_URL, API_BASE_URL } from '@/config/api';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
@@ -51,7 +52,7 @@ interface Seller {
 }
 
 const fetchProduct = async (id: string): Promise<Product> => {
-  const response = await fetch(`http://localhost:8001/api/items/${id}`);
+  const response = await fetch(`${API_BASE_URL}/api/items/${id}`);
   if (!response.ok) {
     throw new Error('Failed to fetch product');
   }
@@ -59,7 +60,7 @@ const fetchProduct = async (id: string): Promise<Product> => {
 };
 
 const fetchSeller = async (sellerId: string): Promise<Seller> => {
-  const response = await fetch(`http://localhost:8001/api/users/${sellerId}`);
+  const response = await fetch(`${API_BASE_URL}/api/users/${sellerId}`);
   if (!response.ok) {
     throw new Error('Failed to fetch seller');
   }

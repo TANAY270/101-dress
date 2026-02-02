@@ -517,7 +517,7 @@ export default function App() {
   const [authForm, setAuthForm] = useState({ email: '', password: '', name: '' });
   const [authError, setAuthError] = useState('');
 
-  const API_URL = 'http://localhost:8001/api';
+  const API_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : 'http://localhost:8001/api';
 
   useEffect(() => {
     const fetchData = async () => {

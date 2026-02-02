@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { API_URL, API_BASE_URL } from '@/config/api';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -71,7 +72,7 @@ const SellItem = () => {
       const uploadData = new FormData();
       uploadData.append('file', images.front);
 
-      const uploadRes = await fetch('http://localhost:8001/api/upload', {
+      const uploadRes = await fetch(`${API_BASE_URL}/api/upload`, {
         method: 'POST',
         body: uploadData,
       });
@@ -114,7 +115,7 @@ const SellItem = () => {
       // Temporary: Auto-login to get token if missing (Dev helper)
       let authToken = token;
       if (!authToken) {
-        const loginRes = await fetch('http://localhost:8001/api/auth/login', {
+        const loginRes = await fetch(`${API_BASE_URL}/api/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams({ 'username': 'alex@example.com', 'password': 'password123' })
@@ -123,7 +124,7 @@ const SellItem = () => {
         authToken = loginData.access_token;
       }
 
-      const createRes = await fetch('http://localhost:8001/api/items', {
+      const createRes = await fetch(`${API_BASE_URL}/api/items`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

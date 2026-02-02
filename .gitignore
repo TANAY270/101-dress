@@ -12,9 +12,12 @@ venv/
 .venv/
 env/
 .env
+.env.local
 
 # Database
 backend/database.db
+backend/database_v2.db
+*.db
 
 # IDE
 .vscode/
@@ -25,3 +28,14 @@ backend/database.db
 # OS
 .DS_Store
 Thumbs.db
+
+# Logs and debug files
+*.log
+debug_output.txt
+fix_output.txt
+
+# Frontend build
+frontend/dist/
+
+# Uploads (consider using cloud storage in production)
+frontend/public/assets/uploads/

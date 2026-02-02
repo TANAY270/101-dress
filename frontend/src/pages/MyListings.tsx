@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { API_URL, API_BASE_URL } from '@/config/api';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -29,7 +30,7 @@ const MyListings = () => {
         // Fetch user items (u1)
         const fetchItems = async () => {
             try {
-                const res = await fetch('http://localhost:8001/api/items?seller_id=u1');
+                const res = await fetch(`${API_BASE_URL}/api/items?seller_id=u1`);
                 if (res.ok) {
                     const data = await res.json();
                     setItems(data);

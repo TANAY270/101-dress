@@ -1,5 +1,83 @@
-# 👗 101 Dresses  
+# 👗 101 Dresses - Frontend
 ### A Trust-First Resale Platform for Occasion Wear
+
+---
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and update with your backend API URL:
+
+```bash
+cp .env.example .env
+```
+
+Required environment variables:
+- `VITE_API_URL` - Backend API base URL (e.g., `http://localhost:8001` for local, `https://your-backend.onrender.com` for production)
+
+---
+
+## Local Development
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Create `.env` file with your backend URL:
+```bash
+VITE_API_URL=http://localhost:8001
+```
+
+3. Run the development server:
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`
+
+---
+
+## Build for Production
+
+```bash
+npm run build
+```
+
+The build output will be in the `dist/` folder.
+
+---
+
+## Deployment
+
+### Netlify
+
+1. Connect your GitHub repository
+2. Set build settings:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+3. Add environment variable:
+   - `VITE_API_URL`: Your backend URL (e.g., `https://your-backend.onrender.com`)
+4. Deploy
+
+### Vercel
+
+1. Connect your GitHub repository
+2. Vercel will auto-detect Vite settings
+3. Add environment variable:
+   - `VITE_API_URL`: Your backend URL
+4. Deploy
+
+---
+
+## Tech Stack
+
+- React 18
+- TypeScript
+- Vite
+- TanStack Query
+- React Router
+- Tailwind CSS
+- Radix UI Components
 
 ---
 

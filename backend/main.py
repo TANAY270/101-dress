@@ -39,6 +39,12 @@ DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///backend/database_v2.db")
 connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
 engine = create_engine(DATABASE_URL, connect_args=connect_args)
 
+app = FastAPI()
+
+@app.get("/")
+def root():
+    return {"status": "Backend running"}
+
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 

@@ -6,3 +6,5 @@ passlib[bcrypt]
 python-multipart
 python-dotenv
 psycopg2-binary
+python-dotenv
+pymongo

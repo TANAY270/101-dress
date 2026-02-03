@@ -3,7 +3,7 @@
 
 ---
 
-## �📌 Problem Statement
+## 📌 Problem Statement
 
 Most fashion resale platforms fail due to:
 - Fake returns and item swapping
@@ -106,7 +106,7 @@ Verified Delivery Partner
 
 ---
 
-## � Project Structure
+## Project Structure
 
 ```
 101-dress/

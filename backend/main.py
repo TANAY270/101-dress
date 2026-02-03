@@ -49,7 +49,8 @@ if DATABASE_URL is None:
 connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
 engine = create_engine(DATABASE_URL, connect_args=connect_args)
 
-app = FastAPI()
+app = FastAPI(title="101 Dress API")
+
 
 @app.get("/")
 def root():
@@ -456,8 +457,3 @@ def read_orders(user_id: Optional[str] = None, session: Session = Depends(get_se
     orders = session.exec(query).all()
     # Explicitly ensure items are loaded if lazy (SQLModel usually handles this dynamically in memory if session is active)
     return orders
-
-if __name__ == "__main__":
-    import uvicorn
-    port = int(os.getenv("PORT", "8001"))
-    uvicorn.run("backend.main:app", host="0.0.0.0", port=port, reload=True)
